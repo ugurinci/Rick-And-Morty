@@ -19,4 +19,19 @@
         android:name="com.ugurinci.rickandmorty.EpisodeListFragment"
         android:label="fragment_episode_list"
         tools:layout="@layout/fragment_episode_list" />
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.ugurinci.rickandmorty.CharacterDetailFragment"
+        android:label="fragment_character_detail"
+        tools:layout="@layout/fragment_character_detail" />
+    <fragment
+        android:id="@+id/locationDetailFragment"
+        android:name="com.ugurinci.rickandmorty.LocationDetailFragment"
+        android:label="fragment_location_detail"
+        tools:layout="@layout/fragment_location_detail" />
+    <fragment
+        android:id="@+id/episodeDetailFragment"
+        android:name="com.ugurinci.rickandmorty.EpisodeDetailFragment"
+        android:label="fragment_episode_detail"
+        tools:layout="@layout/fragment_episode_detail" />
 </navigation>

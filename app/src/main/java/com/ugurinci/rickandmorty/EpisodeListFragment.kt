@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.ugurinci.rickandmorty.databinding.FragmentEpisodeListBinding
 
 class EpisodeListFragment : BaseFragment() {
@@ -18,6 +19,13 @@ class EpisodeListFragment : BaseFragment() {
     ): View {
         _binding = FragmentEpisodeListBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.root.setOnClickListener {
+            findNavController().navigate(EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailFragment(0))
+        }
     }
 
     override fun onDestroyView() {

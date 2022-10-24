@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.ugurinci.rickandmorty.databinding.FragmentEpisodeListBinding
 
@@ -23,8 +24,13 @@ class EpisodeListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.root.setOnClickListener {
-            findNavController().navigate(EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailFragment(0))
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrayOf("Pilot", "Lawnmower Dog"))
+
+        binding.listView.adapter = adapter
+
+        binding.listView.setOnItemClickListener { _, _, position, _ ->
+            findNavController().navigate(EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailFragment(position))
         }
     }
 

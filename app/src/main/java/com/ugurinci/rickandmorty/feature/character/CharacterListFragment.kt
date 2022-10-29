@@ -1,6 +1,7 @@
 package com.ugurinci.rickandmorty.feature.character
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,13 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentCharacterListBinding
+import com.ugurinci.rickandmorty.network.RickAndMortyService
+import com.ugurinci.rickandmorty.network.model.character.CharacterListModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class CharacterListFragment : BaseFragment() {
 
@@ -26,12 +34,31 @@ class CharacterListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, arrayOf("Rick Sanchez", "Morty Smith"))
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://rickandmortyapi.com/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-        binding.listView.adapter = adapter
+        val service = retrofit.create(RickAndMortyService::class.java)
+
+        service.getCharacterList().enqueue(object : Callback<CharacterListModel> {
+            override fun onResponse(
+                call: Call<CharacterListModel>,
+                response: Response<CharacterListModel>
+            ) {
+                val characterList = response.body()?.results?.map { it.name }
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, characterList?.toTypedArray().orEmpty())
+                binding.listView.adapter = adapter
+                Log.i("onResponse", "-> " + "onResponse")
+            }
+
+            override fun onFailure(call: Call<CharacterListModel>, t: Throwable) {
+                Log.i("onFailure", "-> " + "onFailure")
+            }
+        })
 
         binding.listView.setOnItemClickListener { _, _, position, _ ->
-            findNavController().navigate(CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(position))
+            findNavController().navigate(CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(position + 1))
         }
     }
 

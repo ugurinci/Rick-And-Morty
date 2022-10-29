@@ -42,12 +42,12 @@ class EpisodeDetailFragment : BaseFragment() {
 
         val service = retrofit.create(RickAndMortyService::class.java)
 
-        service.getEpisodeById(args.id.toString()).enqueue(object :Callback<EpisodeResult>{
+        service.getEpisodeById(args.id.toString()).enqueue(object : Callback<EpisodeResult> {
             override fun onResponse(
                 call: Call<EpisodeResult>,
                 response: Response<EpisodeResult>
             ) {
-                binding.textView.text= response.body()?.name
+                binding.textView.text = response.body()?.name
                 Log.i("onResponse", "-> " + "onResponse")
             }
 

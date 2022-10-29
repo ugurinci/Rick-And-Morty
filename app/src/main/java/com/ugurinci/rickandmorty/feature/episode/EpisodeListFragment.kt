@@ -41,7 +41,7 @@ class EpisodeListFragment : BaseFragment() {
 
         val service = retrofit.create(RickAndMortyService::class.java)
 
-        service.getEpisodeList().enqueue(object :Callback<EpisodeListModel>{
+        service.getEpisodeList().enqueue(object : Callback<EpisodeListModel> {
             override fun onResponse(
                 call: Call<EpisodeListModel>,
                 response: Response<EpisodeListModel>

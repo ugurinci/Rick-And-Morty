@@ -41,7 +41,7 @@ class LocationListFragment : BaseFragment() {
 
         val service = retrofit.create(RickAndMortyService::class.java)
 
-        service.getLocationList().enqueue(object :Callback<LocationListModel>{
+        service.getLocationList().enqueue(object : Callback<LocationListModel> {
             override fun onResponse(
                 call: Call<LocationListModel>,
                 response: Response<LocationListModel>

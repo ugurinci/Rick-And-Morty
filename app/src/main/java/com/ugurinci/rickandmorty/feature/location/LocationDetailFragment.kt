@@ -42,12 +42,12 @@ class LocationDetailFragment : BaseFragment() {
 
         val service = retrofit.create(RickAndMortyService::class.java)
 
-        service.getLocationById(args.id.toString()).enqueue(object :Callback<LocationResult>{
+        service.getLocationById(args.id.toString()).enqueue(object : Callback<LocationResult> {
             override fun onResponse(
                 call: Call<LocationResult>,
                 response: Response<LocationResult>
             ) {
-                binding.textView.text= response.body()?.name
+                binding.textView.text = response.body()?.name
                 Log.i("onResponse", "-> " + "onResponse")
             }
 

@@ -1,25 +1,26 @@
-package com.ugurinci.rickandmorty
+package com.ugurinci.rickandmorty.feature.location
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.ugurinci.rickandmorty.databinding.FragmentCharacterDetailBinding
+import com.ugurinci.rickandmorty.BaseFragment
+import com.ugurinci.rickandmorty.databinding.FragmentLocationDetailBinding
 
-class CharacterDetailFragment : BaseFragment() {
+class LocationDetailFragment : BaseFragment() {
 
-    private var _binding: FragmentCharacterDetailBinding? = null
+    private var _binding: FragmentLocationDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val args: CharacterDetailFragmentArgs by navArgs()
+    private val args: LocationDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCharacterDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentLocationDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 

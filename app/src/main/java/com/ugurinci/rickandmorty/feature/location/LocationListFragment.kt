@@ -9,13 +9,11 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationListBinding
-import com.ugurinci.rickandmorty.network.RickAndMortyService
+import com.ugurinci.rickandmorty.network.RickAndMortyApi
 import com.ugurinci.rickandmorty.network.model.location.LocationListModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class LocationListFragment : BaseFragment() {
 
@@ -34,14 +32,7 @@ class LocationListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://rickandmortyapi.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(RickAndMortyService::class.java)
-
-        service.getLocationList().enqueue(object : Callback<LocationListModel> {
+        RickAndMortyApi.rickAndMortyService.getLocationList().enqueue(object : Callback<LocationListModel> {
             override fun onResponse(
                 call: Call<LocationListModel>,
                 response: Response<LocationListModel>

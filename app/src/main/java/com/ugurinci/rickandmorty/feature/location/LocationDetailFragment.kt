@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationDetailBinding
-import com.ugurinci.rickandmorty.network.RickAndMortyService
+import com.ugurinci.rickandmorty.network.RickAndMortyApi
 import com.ugurinci.rickandmorty.network.model.location.LocationResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class LocationDetailFragment : BaseFragment() {
 
@@ -35,14 +33,7 @@ class LocationDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://rickandmortyapi.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(RickAndMortyService::class.java)
-
-        service.getLocationById(args.id.toString()).enqueue(object : Callback<LocationResult> {
+        RickAndMortyApi.rickAndMortyService.getLocationById(args.id.toString()).enqueue(object : Callback<LocationResult> {
             override fun onResponse(
                 call: Call<LocationResult>,
                 response: Response<LocationResult>

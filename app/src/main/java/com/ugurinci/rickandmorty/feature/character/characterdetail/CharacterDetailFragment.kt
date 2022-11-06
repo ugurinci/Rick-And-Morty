@@ -1,18 +1,13 @@
-package com.ugurinci.rickandmorty.feature.character
+package com.ugurinci.rickandmorty.feature.character.characterdetail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentCharacterDetailBinding
-import com.ugurinci.rickandmorty.network.RickAndMortyApi
-import com.ugurinci.rickandmorty.network.model.character.CharacterResult
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CharacterDetailFragment : BaseFragment() {
 
@@ -20,6 +15,8 @@ class CharacterDetailFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private val args: CharacterDetailFragmentArgs by navArgs()
+
+    private val viewModel: CharacterDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,19 +30,9 @@ class CharacterDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        RickAndMortyApi.rickAndMortyService.getCharacterById(args.id.toString()).enqueue(object : Callback<CharacterResult> {
-            override fun onResponse(
-                call: Call<CharacterResult>,
-                response: Response<CharacterResult>
-            ) {
-                binding.textView.text = response.body()?.name
-                Log.i("onResponse", "-> " + "onResponse")
-            }
-
-            override fun onFailure(call: Call<CharacterResult>, t: Throwable) {
-                Log.i("onFailure", "-> " + "onFailure")
-            }
-        })
+        viewModel.characterDetail.observe(viewLifecycleOwner) {
+            binding.textView.text = it.name
+        }
     }
 
     override fun onDestroyView() {

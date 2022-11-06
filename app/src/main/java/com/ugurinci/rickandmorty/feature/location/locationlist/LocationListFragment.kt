@@ -1,24 +1,21 @@
-package com.ugurinci.rickandmorty.feature.location
+package com.ugurinci.rickandmorty.feature.location.locationlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationListBinding
-import com.ugurinci.rickandmorty.network.RickAndMortyApi
-import com.ugurinci.rickandmorty.network.model.location.LocationListModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LocationListFragment : BaseFragment() {
 
     private var _binding: FragmentLocationListBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: LocationListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,21 +29,13 @@ class LocationListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        RickAndMortyApi.rickAndMortyService.getLocationList().enqueue(object : Callback<LocationListModel> {
-            override fun onResponse(
-                call: Call<LocationListModel>,
-                response: Response<LocationListModel>
-            ) {
-                val locationList = response.body()?.results?.map { it.name }
-                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, locationList?.toTypedArray().orEmpty())
-                binding.listView.adapter = adapter
-                Log.i("onResponse", "-> " + "onResponse")
+        viewModel.locationList.observe(viewLifecycleOwner) {
+            val locationList = it.results.map { locationResult ->
+                locationResult.name
             }
-
-            override fun onFailure(call: Call<LocationListModel>, t: Throwable) {
-                Log.i("onFailure", "-> " + "onFailure")
-            }
-        })
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, locationList)
+            binding.listView.adapter = adapter
+        }
 
         binding.listView.setOnItemClickListener { _, _, position, _ ->
             findNavController().navigate(LocationListFragmentDirections.actionLocationListFragmentToLocationDetailFragment(position + 1))

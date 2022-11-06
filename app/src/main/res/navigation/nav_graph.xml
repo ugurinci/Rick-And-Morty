@@ -6,7 +6,7 @@
     app:startDestination="@id/character_list_fragment">
     <fragment
         android:id="@+id/character_list_fragment"
-        android:name="com.ugurinci.rickandmorty.feature.character.CharacterListFragment"
+        android:name="com.ugurinci.rickandmorty.feature.character.characterlist.CharacterListFragment"
         android:label="fragment_character_list"
         tools:layout="@layout/fragment_character_list" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/location_list_fragment"
-        android:name="com.ugurinci.rickandmorty.feature.location.LocationListFragment"
+        android:name="com.ugurinci.rickandmorty.feature.location.locationlist.LocationListFragment"
         android:label="fragment_location_list"
         tools:layout="@layout/fragment_location_list" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/episode_list_fragment"
-        android:name="com.ugurinci.rickandmorty.feature.episode.EpisodeListFragment"
+        android:name="com.ugurinci.rickandmorty.feature.episode.episodelist.EpisodeListFragment"
         android:label="fragment_episode_list"
         tools:layout="@layout/fragment_episode_list" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterDetailFragment"
-        android:name="com.ugurinci.rickandmorty.feature.character.CharacterDetailFragment"
+        android:name="com.ugurinci.rickandmorty.feature.character.characterdetail.CharacterDetailFragment"
         android:label="fragment_character_detail"
         tools:layout="@layout/fragment_character_detail" >
         <argument
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationDetailFragment"
-        android:name="com.ugurinci.rickandmorty.feature.location.LocationDetailFragment"
+        android:name="com.ugurinci.rickandmorty.feature.location.locationdetail.LocationDetailFragment"
         android:label="fragment_location_detail"
         tools:layout="@layout/fragment_location_detail" >
         <argument
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/episodeDetailFragment"
-        android:name="com.ugurinci.rickandmorty.feature.episode.EpisodeDetailFragment"
+        android:name="com.ugurinci.rickandmorty.feature.episode.episodedetail.EpisodeDetailFragment"
         android:label="fragment_episode_detail"
         tools:layout="@layout/fragment_episode_detail" >
         <argument

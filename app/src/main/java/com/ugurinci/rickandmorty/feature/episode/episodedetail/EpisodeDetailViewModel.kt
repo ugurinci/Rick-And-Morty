@@ -1,15 +1,13 @@
 package com.ugurinci.rickandmorty.feature.episode.episodedetail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ugurinci.rickandmorty.network.RickAndMortyApi
 import com.ugurinci.rickandmorty.network.model.episode.EpisodeResult
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 class EpisodeDetailViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
@@ -17,23 +15,9 @@ class EpisodeDetailViewModel(private val savedStateHandle: SavedStateHandle) : V
     val episodeDetail: LiveData<EpisodeResult> = _episodeDetail
 
     init {
-        getEpisodeDetail()
-    }
-
-    private fun getEpisodeDetail() {
-        val id = EpisodeDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).id.toString()
-        RickAndMortyApi.rickAndMortyService.getEpisodeById(id).enqueue(object : Callback<EpisodeResult> {
-            override fun onResponse(
-                call: Call<EpisodeResult>,
-                response: Response<EpisodeResult>
-            ) {
-                _episodeDetail.value = response.body()
-                Log.i("onResponse", "-> " + "onResponse")
-            }
-
-            override fun onFailure(call: Call<EpisodeResult>, t: Throwable) {
-                Log.i("onFailure", "-> " + "onFailure")
-            }
-        })
+        viewModelScope.launch {
+            val id = EpisodeDetailFragmentArgs.fromSavedStateHandle(savedStateHandle).id.toString()
+            _episodeDetail.value = RickAndMortyApi.rickAndMortyService.getEpisodeById(id)
+        }
     }
 }

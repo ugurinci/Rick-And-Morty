@@ -6,26 +6,25 @@ import com.ugurinci.rickandmorty.network.model.episode.EpisodeListModel
 import com.ugurinci.rickandmorty.network.model.episode.EpisodeResult
 import com.ugurinci.rickandmorty.network.model.location.LocationListModel
 import com.ugurinci.rickandmorty.network.model.location.LocationResult
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RickAndMortyService {
     @GET("character")
-    fun getCharacterList(): Call<CharacterListModel>
+    suspend fun getCharacterList(): CharacterListModel
 
     @GET("character/{id}")
-    fun getCharacterById(@Path("id") id: String): Call<CharacterResult>
+    suspend fun getCharacterById(@Path("id") id: String): CharacterResult
 
     @GET("location")
-    fun getLocationList(): Call<LocationListModel>
+    suspend fun getLocationList(): LocationListModel
 
     @GET("location/{id}")
-    fun getLocationById(@Path("id") id: String): Call<LocationResult>
+    suspend fun getLocationById(@Path("id") id: String): LocationResult
 
     @GET("episode")
-    fun getEpisodeList(): Call<EpisodeListModel>
+    suspend fun getEpisodeList(): EpisodeListModel
 
     @GET("episode/{id}")
-    fun getEpisodeById(@Path("id") id: String): Call<EpisodeResult>
+    suspend fun getEpisodeById(@Path("id") id: String): EpisodeResult
 }

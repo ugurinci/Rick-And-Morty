@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationDetailBinding
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 
 class LocationDetailFragment : BaseFragment() {
 
@@ -30,8 +33,10 @@ class LocationDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.locationDetail.observe(viewLifecycleOwner) {
-            binding.textView.text = it.name
+        lifecycleScope.launch {
+            viewModel.locationDetail.filterNotNull().collect {
+                binding.textView.text = it.name
+            }
         }
     }
 

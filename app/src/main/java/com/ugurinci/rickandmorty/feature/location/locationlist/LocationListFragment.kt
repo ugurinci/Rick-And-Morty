@@ -10,9 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationListBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LocationListFragment : BaseFragment() {
 
     private var _binding: FragmentLocationListBinding? = null

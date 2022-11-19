@@ -9,9 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentCharacterDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class CharacterDetailFragment : BaseFragment() {
 
     private var _binding: FragmentCharacterDetailBinding? = null

@@ -24,7 +24,7 @@ interface RickAndMortyService {
     suspend fun getLocationById(@Path("id") id: String): LocationResult
 
     @GET("episode")
-    suspend fun getEpisodeList(): EpisodeListModel
+    suspend fun getEpisodeList(@Query("page") page: Int): EpisodeListModel
 
     @GET("episode/{id}")
     suspend fun getEpisodeById(@Path("id") id: String): EpisodeResult

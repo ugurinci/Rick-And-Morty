@@ -8,10 +8,11 @@ import com.ugurinci.rickandmorty.network.model.location.LocationListModel
 import com.ugurinci.rickandmorty.network.model.location.LocationResult
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RickAndMortyService {
     @GET("character")
-    suspend fun getCharacterList(): CharacterListModel
+    suspend fun getCharacterList(@Query("page") page: Int): CharacterListModel
 
     @GET("character/{id}")
     suspend fun getCharacterById(@Path("id") id: String): CharacterResult

@@ -15,13 +15,4 @@ class EpisodeListViewModel @Inject constructor(private val rickAndMortyService: 
     val episodeListFlow = Pager(PagingConfig(20)) {
         EpisodeListPagingSource(rickAndMortyService)
     }.flow.cachedIn(viewModelScope)
-
-    /*private var _episodeList = MutableStateFlow<EpisodeListModel?>(null)
-    val episodeList = _episodeList.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            _episodeList.value = rickAndMortyService.getEpisodeList()
-        }
-    }*/
 }

@@ -52,14 +52,6 @@ class LocationListFragment : BaseFragment() {
         locationListAdapter.click = {
             findNavController().navigate(LocationListFragmentDirections.actionLocationListFragmentToLocationDetailFragment(it))
         }
-
-        /*lifecycleScope.launch {
-            viewModel.locationList.filterNotNull().collect {
-                val locationList = it.results.map { locationResult ->
-                    locationResult.name
-                }
-            }
-        }*/
     }
 
     override fun onDestroyView() {

@@ -52,14 +52,6 @@ class EpisodeListFragment : BaseFragment() {
         episodeListAdapter.click = {
             findNavController().navigate(EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailFragment(it))
         }
-
-        /*lifecycleScope.launch {
-            viewModel.episodeList.filterNotNull().collect {
-                val episodeList = it.results.map { episodeResult ->
-                    episodeResult.name
-                }
-            }
-        }*/
     }
 
     override fun onDestroyView() {

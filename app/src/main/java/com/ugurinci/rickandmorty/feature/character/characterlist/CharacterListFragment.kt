@@ -52,14 +52,6 @@ class CharacterListFragment : BaseFragment() {
         characterListAdapter.click = {
             findNavController().navigate(CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(it))
         }
-
-        /*lifecycleScope.launch {
-            viewModel.characterList.filterNotNull().collect {
-                val characterList = it.results.map { characterResult ->
-                    characterResult.name
-                }
-            }
-        }*/
     }
 
     override fun onDestroyView() {

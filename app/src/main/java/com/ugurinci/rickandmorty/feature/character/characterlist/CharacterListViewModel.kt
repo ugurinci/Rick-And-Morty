@@ -15,13 +15,4 @@ class CharacterListViewModel @Inject constructor(private val rickAndMortyService
     val characterListFlow = Pager(PagingConfig(20)) {
         CharacterListPagingSource(rickAndMortyService)
     }.flow.cachedIn(viewModelScope)
-
-    /*private var _characterList = MutableStateFlow<CharacterListModel?>(null)
-    val characterList = _characterList.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            _characterList.value = rickAndMortyService.getCharacterList()
-        }
-    }*/
 }

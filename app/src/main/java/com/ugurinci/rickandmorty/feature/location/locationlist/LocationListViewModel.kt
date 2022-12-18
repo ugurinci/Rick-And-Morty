@@ -15,13 +15,4 @@ class LocationListViewModel @Inject constructor(private val rickAndMortyService:
     val locationListFlow = Pager(PagingConfig(20)) {
         LocationListPagingSource(rickAndMortyService)
     }.flow.cachedIn(viewModelScope)
-
-    /*private var _locationList = MutableStateFlow<LocationListModel?>(null)
-    val locationList = _locationList.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            _locationList.value = rickAndMortyService.getLocationList()
-        }
-    }*/
 }

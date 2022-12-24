@@ -37,7 +37,13 @@ class LocationDetailFragment : BaseFragment() {
 
         lifecycleScope.launch {
             viewModel.locationDetail.filterNotNull().collect {
-                binding.textView.text = it.name
+                binding.apply {
+                    textViewName.text = it.name
+                    textViewType.text = "Type : " + it.type
+                    textViewDimension.text = "Dimension : " + it.dimension
+                    textViewResidents.text = "Residents : " + it.residents.toString()
+                    textViewCreated.text = "Residents : " + it.created
+                }
             }
         }
     }

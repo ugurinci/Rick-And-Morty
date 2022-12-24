@@ -37,7 +37,13 @@ class EpisodeDetailFragment : BaseFragment() {
 
         lifecycleScope.launch {
             viewModel.episodeDetail.filterNotNull().collect {
-                binding.textView.text = it.name
+                binding.apply {
+                    textViewName.text = it.name
+                    textViewAirDate.text = "Air Date : " + it.airDate
+                    textViewEpisode.text = "Episode : " + it.episode
+                    textViewCharacters.text = "Characters : " + it.characters.toString()
+                    textViewCreated.text = "Created : " + it.created
+                }
             }
         }
     }

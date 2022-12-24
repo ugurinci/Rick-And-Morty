@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentCharacterDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +38,18 @@ class CharacterDetailFragment : BaseFragment() {
 
         lifecycleScope.launch {
             viewModel.characterDetail.filterNotNull().collect {
-                binding.textView.text = it.name
+                binding.apply {
+                    Glide.with(root).load(it.image).into(imageView)
+                    textViewName.text = it.name
+                    textViewStatus.text = "Status : " + it.status
+                    textViewSpecies.text = "Species : " + it.species
+                    textViewType.text = "Type : " + it.type
+                    textViewGender.text = "Gender : " + it.gender
+                    textViewOrigin.text = "Origin : " + it.origin.name
+                    textViewLocation.text = "Location : " + it.location.name
+                    textViewEpisodeList.text = "Episode List : " + it.episode.toString()
+                    textViewCreated.text = "Created : " + it.created
+                }
             }
         }
     }

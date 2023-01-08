@@ -39,8 +39,7 @@ class CharacterListFragment : BaseFragment() {
         binding.apply {
             recyclerView.adapter = characterListAdapter
 
-            val dividerItemDecoration = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
-            recyclerView.addItemDecoration(dividerItemDecoration)
+            recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         }
 
         lifecycleScope.launch {

@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentCharacterDetailBinding
+import com.ugurinci.rickandmorty.util.StringUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -50,6 +52,26 @@ class CharacterDetailFragment : BaseFragment() {
                     textViewEpisodeList.text = "Episode List : " + it.episode.toString()
                     textViewCreated.text = "Created : " + it.created
                 }
+            }
+        }
+
+        binding.textViewOrigin.setOnClickListener {
+            viewModel.characterDetail.value?.origin?.url?.let {
+                findNavController().navigate(
+                    CharacterDetailFragmentDirections.actionCharacterDetailFragmentToLocationDetailFragment(
+                        StringUtil.getLastWordInt(it)
+                    )
+                )
+            }
+        }
+
+        binding.textViewLocation.setOnClickListener {
+            viewModel.characterDetail.value?.location?.url?.let {
+                findNavController().navigate(
+                    CharacterDetailFragmentDirections.actionCharacterDetailFragmentToLocationDetailFragment(
+                        StringUtil.getLastWordInt(it)
+                    )
+                )
             }
         }
     }

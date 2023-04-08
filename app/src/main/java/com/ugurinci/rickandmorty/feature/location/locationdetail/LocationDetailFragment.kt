@@ -42,7 +42,7 @@ class LocationDetailFragment : BaseFragment() {
                     textViewType.text = "Type : " + it.type
                     textViewDimension.text = "Dimension : " + it.dimension
                     textViewResidents.text = "Residents : " + it.residents.toString()
-                    textViewCreated.text = "Residents : " + it.created
+                    textViewCreated.text = "Created : " + it.created
                 }
             }
         }

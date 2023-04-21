@@ -34,23 +34,30 @@ class EpisodeListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val episodeListAdapter = EpisodeListAdapter(EpisodeComparator)
+        val episodeListPagingAdapter = EpisodeListPagingAdapter(EpisodeComparator)
 
         binding.apply {
-            recyclerView.adapter = episodeListAdapter
+            recyclerView.adapter = episodeListPagingAdapter
 
-            val dividerItemDecoration = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
+            val dividerItemDecoration = DividerItemDecoration(
+                recyclerView.context,
+                DividerItemDecoration.VERTICAL
+            )
             recyclerView.addItemDecoration(dividerItemDecoration)
         }
 
         lifecycleScope.launch {
             viewModel.episodeListFlow.collectLatest {
-                episodeListAdapter.submitData(it)
+                episodeListPagingAdapter.submitData(it)
             }
         }
 
-        episodeListAdapter.click = {
-            findNavController().navigate(EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailFragment(it))
+        episodeListPagingAdapter.click = {
+            findNavController().navigate(
+                EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailFragment(
+                    it
+                )
+            )
         }
     }
 

@@ -124,18 +124,33 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewOrigin"
             tools:text="Location" />
 
-        <TextView
-            android:id="@+id/textViewEpisodeList"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/layoutEpisodeList"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/shape_radius_8dp_border_1dp_flax"
-            android:padding="8dp"
-            android:textAlignment="center"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLocation"
-            tools:text="Episode List" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLocation">
+
+            <TextView
+                android:id="@+id/textViewEpisodeList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="Episode List"
+                android:textAlignment="center"
+                tools:text="Episode List" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/episode_row_item" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textViewCreated"
@@ -147,7 +162,7 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewEpisodeList"
+            app:layout_constraintTop_toBottomOf="@+id/layoutEpisodeList"
             tools:text="Created" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -7,12 +7,18 @@ import androidx.recyclerview.widget.DiffUtil
 import com.ugurinci.rickandmorty.databinding.EpisodeRowItemBinding
 import com.ugurinci.rickandmorty.network.model.episode.EpisodeResult
 
-class EpisodeListAdapter(diffCallback: DiffUtil.ItemCallback<EpisodeResult>) : PagingDataAdapter<EpisodeResult, EpisodeViewHolder>(diffCallback) {
+class EpisodeListPagingAdapter(
+    diffCallback: DiffUtil.ItemCallback<EpisodeResult>
+) : PagingDataAdapter<EpisodeResult, EpisodeViewHolder>(diffCallback) {
 
     var click: (Int) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
-        val binding = EpisodeRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = EpisodeRowItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return EpisodeViewHolder(binding, click)
     }
 

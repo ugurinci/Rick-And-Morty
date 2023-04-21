@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentCharacterDetailBinding
+import com.ugurinci.rickandmorty.feature.character.characterlist.EpisodeListAdapter
 import com.ugurinci.rickandmorty.util.StringUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
@@ -25,6 +26,8 @@ class CharacterDetailFragment : BaseFragment() {
     private val args: CharacterDetailFragmentArgs by navArgs()
 
     private val viewModel: CharacterDetailViewModel by viewModels()
+
+    private val episodeListAdapter = EpisodeListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +52,6 @@ class CharacterDetailFragment : BaseFragment() {
                     textViewGender.text = "Gender : " + it.gender
                     textViewOrigin.text = "Origin : " + it.origin.name
                     textViewLocation.text = "Location : " + it.location.name
-                    textViewEpisodeList.text = "Episode List : " + it.episode.toString()
                     textViewCreated.text = "Created : " + it.created
                 }
                 viewModel.getEpisodes(StringUtil.getLastWordList(it.episode))
@@ -58,7 +60,8 @@ class CharacterDetailFragment : BaseFragment() {
 
         lifecycleScope.launch {
             viewModel.episodeList.filterNotNull().collect {
-                println(it)
+                episodeListAdapter.episodeList = it
+                binding.recyclerView.adapter = episodeListAdapter
             }
         }
 

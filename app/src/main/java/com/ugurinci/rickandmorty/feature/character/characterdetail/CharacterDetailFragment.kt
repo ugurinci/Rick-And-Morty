@@ -84,6 +84,14 @@ class CharacterDetailFragment : BaseFragment() {
                 )
             }
         }
+
+        episodeListAdapter.click = {
+            findNavController().navigate(
+                CharacterDetailFragmentDirections.actionCharacterDetailFragmentToEpisodeDetailFragment(
+                    it
+                )
+            )
+        }
     }
 
     override fun onDestroyView() {

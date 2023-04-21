@@ -28,4 +28,7 @@ interface RickAndMortyService {
 
     @GET("episode/{id}")
     suspend fun getEpisodeById(@Path("id") id: String): EpisodeResult
+
+    @GET("episode/{idList}")
+    suspend fun getEpisodeListByIdList(@Path("idList") idList: String): List<EpisodeResult>
 }

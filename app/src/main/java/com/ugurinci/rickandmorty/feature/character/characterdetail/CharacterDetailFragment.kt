@@ -52,6 +52,13 @@ class CharacterDetailFragment : BaseFragment() {
                     textViewEpisodeList.text = "Episode List : " + it.episode.toString()
                     textViewCreated.text = "Created : " + it.created
                 }
+                viewModel.getEpisodes(StringUtil.getLastWordList(it.episode))
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.episodeList.filterNotNull().collect {
+                println(it)
             }
         }
 

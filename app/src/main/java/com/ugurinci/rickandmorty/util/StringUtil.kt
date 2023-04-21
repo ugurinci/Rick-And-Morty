@@ -18,11 +18,7 @@ object StringUtil {
         return list
     }
 
-    fun getLastWordIntList(stringList: List<String>): List<Int> {
-        val list = mutableListOf<Int>()
-        stringList.forEach {
-            list.add(getLastWordInt(it))
-        }
-        return list
+    fun joinIdListToString(idList: List<String>): String {
+        return idList.joinToString(",")
     }
 }

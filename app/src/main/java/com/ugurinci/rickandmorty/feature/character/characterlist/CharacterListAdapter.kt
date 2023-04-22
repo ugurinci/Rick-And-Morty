@@ -1,4 +1,4 @@
-package com.ugurinci.rickandmorty.feature.location.locationlist
+package com.ugurinci.rickandmorty.feature.character.characterlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

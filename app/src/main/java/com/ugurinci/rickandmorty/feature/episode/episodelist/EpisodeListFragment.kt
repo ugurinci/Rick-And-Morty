@@ -39,11 +39,12 @@ class EpisodeListFragment : BaseFragment() {
         binding.apply {
             recyclerView.adapter = episodeListPagingAdapter
 
-            val dividerItemDecoration = DividerItemDecoration(
-                recyclerView.context,
-                DividerItemDecoration.VERTICAL
+            recyclerView.addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
             )
-            recyclerView.addItemDecoration(dividerItemDecoration)
         }
 
         lifecycleScope.launch {

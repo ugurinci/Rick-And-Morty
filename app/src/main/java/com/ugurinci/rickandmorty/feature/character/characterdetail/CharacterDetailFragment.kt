@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentCharacterDetailBinding
-import com.ugurinci.rickandmorty.feature.character.characterlist.EpisodeListAdapter
+import com.ugurinci.rickandmorty.feature.episode.episodelist.EpisodeListAdapter
 import com.ugurinci.rickandmorty.util.StringUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull

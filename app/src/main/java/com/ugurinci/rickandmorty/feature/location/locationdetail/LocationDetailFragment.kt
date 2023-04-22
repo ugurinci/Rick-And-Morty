@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationDetailBinding
-import com.ugurinci.rickandmorty.feature.location.locationlist.CharacterListAdapter
+import com.ugurinci.rickandmorty.feature.character.characterlist.CharacterListAdapter
 import com.ugurinci.rickandmorty.util.StringUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull

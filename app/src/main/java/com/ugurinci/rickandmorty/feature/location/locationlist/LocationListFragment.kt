@@ -34,23 +34,31 @@ class LocationListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val locationListAdapter = LocationListAdapter(LocationComparator)
+        val locationListPagingAdapter = LocationListPagingAdapter(LocationComparator)
 
         binding.apply {
-            recyclerView.adapter = locationListAdapter
+            recyclerView.adapter = locationListPagingAdapter
 
-            val dividerItemDecoration = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
-            recyclerView.addItemDecoration(dividerItemDecoration)
+            recyclerView.addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
         }
 
         lifecycleScope.launch {
             viewModel.locationListFlow.collectLatest {
-                locationListAdapter.submitData(it)
+                locationListPagingAdapter.submitData(it)
             }
         }
 
-        locationListAdapter.click = {
-            findNavController().navigate(LocationListFragmentDirections.actionLocationListFragmentToLocationDetailFragment(it))
+        locationListPagingAdapter.click = {
+            findNavController().navigate(
+                LocationListFragmentDirections.actionLocationListFragmentToLocationDetailFragment(
+                    it
+                )
+            )
         }
     }
 

@@ -1,4 +1,4 @@
-package com.ugurinci.rickandmorty.feature.character.characterlist
+package com.ugurinci.rickandmorty.feature.episode.episodelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

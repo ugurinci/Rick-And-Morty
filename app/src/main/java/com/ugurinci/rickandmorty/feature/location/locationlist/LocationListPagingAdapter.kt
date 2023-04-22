@@ -7,12 +7,18 @@ import androidx.recyclerview.widget.DiffUtil
 import com.ugurinci.rickandmorty.databinding.LocationRowItemBinding
 import com.ugurinci.rickandmorty.network.model.location.LocationResult
 
-class LocationListAdapter(diffCallback: DiffUtil.ItemCallback<LocationResult>) : PagingDataAdapter<LocationResult, LocationViewHolder>(diffCallback) {
+class LocationListPagingAdapter(
+    diffCallback: DiffUtil.ItemCallback<LocationResult>
+) : PagingDataAdapter<LocationResult, LocationViewHolder>(diffCallback) {
 
     var click: (Int) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
-        val binding = LocationRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = LocationRowItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return LocationViewHolder(binding, click)
     }
 

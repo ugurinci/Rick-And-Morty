@@ -66,5 +66,8 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_episodeDetailFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
     </fragment>
 </navigation>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationDetailBinding
@@ -56,6 +57,14 @@ class LocationDetailFragment : BaseFragment() {
                 characterListAdapter.characterList = it
                 binding.recyclerView.adapter = characterListAdapter
             }
+        }
+
+        characterListAdapter.click = {
+            findNavController().navigate(
+                LocationDetailFragmentDirections.actionLocationDetailFragmentToCharacterDetailFragment(
+                    it
+                )
+            )
         }
     }
 

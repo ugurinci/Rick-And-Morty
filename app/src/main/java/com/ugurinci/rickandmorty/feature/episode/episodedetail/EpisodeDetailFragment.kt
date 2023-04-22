@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentEpisodeDetailBinding
+import com.ugurinci.rickandmorty.feature.character.characterlist.CharacterListAdapter
 import com.ugurinci.rickandmorty.util.StringUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
@@ -23,6 +24,8 @@ class EpisodeDetailFragment : BaseFragment() {
     private val args: EpisodeDetailFragmentArgs by navArgs()
 
     private val viewModel: EpisodeDetailViewModel by viewModels()
+
+    private val characterListAdapter = CharacterListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +45,6 @@ class EpisodeDetailFragment : BaseFragment() {
                     textViewName.text = it.name
                     textViewAirDate.text = "Air Date : " + it.airDate
                     textViewEpisode.text = "Episode : " + it.episode
-                    textViewCharacters.text = "Characters : " + it.characters.toString()
                     textViewCreated.text = "Created : " + it.created
                 }
                 viewModel.getCharacters(StringUtil.getLastWordList(it.characters))
@@ -51,7 +53,8 @@ class EpisodeDetailFragment : BaseFragment() {
 
         lifecycleScope.launch {
             viewModel.characterList.filterNotNull().collect {
-                println(it)
+                characterListAdapter.characterList = it
+                binding.recyclerView.adapter = characterListAdapter
             }
         }
     }

@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationDetailBinding
+import com.ugurinci.rickandmorty.util.StringUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -44,6 +45,13 @@ class LocationDetailFragment : BaseFragment() {
                     textViewResidents.text = "Residents : " + it.residents.toString()
                     textViewCreated.text = "Created : " + it.created
                 }
+                viewModel.getCharacters(StringUtil.getLastWordList(it.residents))
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.characterList.filterNotNull().collect {
+                println(it)
             }
         }
     }

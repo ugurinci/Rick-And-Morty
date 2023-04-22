@@ -34,22 +34,31 @@ class CharacterListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val characterListAdapter = CharacterListAdapter(CharacterComparator)
+        val characterListPagingAdapter = CharacterListPagingAdapter(CharacterComparator)
 
         binding.apply {
-            recyclerView.adapter = characterListAdapter
+            recyclerView.adapter = characterListPagingAdapter
 
-            recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+            recyclerView.addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
         }
 
         lifecycleScope.launch {
             viewModel.characterListFlow.collectLatest {
-                characterListAdapter.submitData(it)
+                characterListPagingAdapter.submitData(it)
             }
         }
 
-        characterListAdapter.click = {
-            findNavController().navigate(CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(it))
+        characterListPagingAdapter.click = {
+            findNavController().navigate(
+                CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(
+                    it
+                )
+            )
         }
     }
 

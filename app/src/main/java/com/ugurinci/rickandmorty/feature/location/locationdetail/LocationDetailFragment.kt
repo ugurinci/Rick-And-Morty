@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.ugurinci.rickandmorty.BaseFragment
 import com.ugurinci.rickandmorty.databinding.FragmentLocationDetailBinding
+import com.ugurinci.rickandmorty.feature.location.locationlist.CharacterListAdapter
 import com.ugurinci.rickandmorty.util.StringUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
@@ -23,6 +24,8 @@ class LocationDetailFragment : BaseFragment() {
     private val args: LocationDetailFragmentArgs by navArgs()
 
     private val viewModel: LocationDetailViewModel by viewModels()
+
+    private val characterListAdapter = CharacterListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +45,6 @@ class LocationDetailFragment : BaseFragment() {
                     textViewName.text = it.name
                     textViewType.text = "Type : " + it.type
                     textViewDimension.text = "Dimension : " + it.dimension
-                    textViewResidents.text = "Residents : " + it.residents.toString()
                     textViewCreated.text = "Created : " + it.created
                 }
                 viewModel.getCharacters(StringUtil.getLastWordList(it.residents))
@@ -51,7 +53,8 @@ class LocationDetailFragment : BaseFragment() {
 
         lifecycleScope.launch {
             viewModel.characterList.filterNotNull().collect {
-                println(it)
+                characterListAdapter.characterList = it
+                binding.recyclerView.adapter = characterListAdapter
             }
         }
     }

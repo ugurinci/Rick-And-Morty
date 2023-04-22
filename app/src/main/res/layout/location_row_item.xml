@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_radius_8dp_border_1dp_flax"
         android:padding="8dp"
+        app:drawableRightCompat="@drawable/round_arrow_forward_ios_24_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
